@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Hello APIs</h1>
+    <ul> 
+    </ul>
+    <button id="clear">Clear</button>
+    <button id="load">Load</button>
+    <script>
+        (function () {
+            function load() {
+                clear();
+                fetch('api/values')
+                    .then((res) => res.json())
+                    .then((data) => {
+                        const ul = document.querySelector('ul');
+
+                        for (let item of data) {
+                            const li = document.createElement('li');
+                            li.innerHTML = item;
+                            ul.appendChild(li);
+                        }
+                    });
+            }
+            function clear() {
+                document.querySelector('ul').innerHTML = "";
+            }
+
+            const clearButton = document.querySelector("#clear");
+            clearButton.addEventListener('click', clear);
+
+            const loadButton = document.querySelector("#load");
+            loadButton.addEventListener('click', load);
+        })();
+    </script>
+</body>
+</html>
